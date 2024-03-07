@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Wellness To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.healthcareitnews.com/sites/hitn/files/Global%20healthcare_2.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .tasks {
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.9); 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+        }
+
+        .tasks ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tasks input[type="text"], .tasks button {
+            margin-top: 10px;
+            padding: 5px;
+        }
+
+        .health-info {
+            padding: 20px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+        }
+        
+    </style>
+</head>
+<body ng-app="healthApp" ng-controller="MainController">
+    <div class="container">
+        <h1>Health & Wellness To-Do List</h1>
+        
+        <!-- Tasks Section -->
+        <section class="tasks">
+            <h2>Tasks</h2>
+            <ul>
+                <li ng-repeat="task in tasks">{{ task }}</li>
+            </ul>
+            <form ng-submit="addTask()">
+                <input type="text" placeholder="Add a new task" ng-model="newTask">
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+        
+        <section class="health-info">
+            <h2>Health Necessity & Information</h2>
+            <p>{{ healthInfo }}</p>
+            
+        </section>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('healthApp', [])
+        .controller('MainController', function($scope) {
+            $scope.tasks = ['Exercise for 30 minutes', 'Eat 5 servings of fruits and vegetables', 'Drink 8 glasses of water'];
+            $scope.newTask = '';
+
+            $scope.addTask = function() {
+                if ($scope.newTask.trim() !== '') {
+                    $scope.tasks.push($scope.newTask.trim());
+                    $scope.newTask = '';
+                }
+            };
+
+                      $scope.healthInfo = "Maintaining a healthy lifestyle is important for your overall well-being. It includes eating a balanced diet, staying hydrated, and engaging in regular physical activity.";
+        });
+    </script>
+</body>
+</html>
